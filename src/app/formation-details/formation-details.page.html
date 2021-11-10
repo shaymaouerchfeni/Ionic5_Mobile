@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title
+        [style.color]="training?.level =='beginner' ? 'green ': training?.level =='advanced' ?'red':'orange' "
+        >{{training?.title}}</ion-card-title
+      >
+      <ion-card-subtitle>{{training?.description}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  <div class="text" *ngIf="trainingSessions.length!==0">
+    la liste de sessions
+  </div>
+  <ion-card *ngFor="let trainingSession of trainingSessions">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="../../assets/img/formation.jpg" />
+      </ion-avatar>
+      <ion-label>
+        <div *ngFor="let instructor of trainingSession?.instructor">
+          <p>{{instructor.firstName}} {{instructor.lastName}}</p>
+        </div>
+        <p>date debut :{{trainingSession?.startDate}}</p>
+
+        <p>date fin :{{trainingSession?.endDate}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-card-header>
+      <ion-card-title
+        *ngIf="(trainingSession.students.length <2) && (!getStatus(trainingSession._id)) "
+        ><a (click)="inscription(trainingSession._id)">Inscription</a>
+      </ion-card-title>
+      <ion-card-title
+        *ngIf="(trainingSession.students.length >2) || (trainingSession.students.length ==2)"
+        [ngStyle]="{'color':'red'}"
+        >l'insc fermée
+      </ion-card-title>
+      <ion-card-title *ngFor="let s of trainingSession.students">
+        <div *ngIf="student?._id==s._id">deja inscrit</div>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-header>
+      <ion-card-title class="download"
+        ><div class="title">le programme de la formation</div>
+        <ion-icon
+          class="icon"
+          (click)="download(trainingSession.training?.program)"
+          name="download-outline"
+        ></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

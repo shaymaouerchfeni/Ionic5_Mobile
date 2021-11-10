@@ -1,0 +1,145 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form
+    class="line"
+    [formGroup]="studentForm"
+    novalidate
+    (ngSubmit)="addStudent()"
+  >
+    <ion-item lines="full">
+      <ion-label position="floating">UserName</ion-label>
+      <ion-input type="text" formControlName="username" required></ion-input>
+      <span
+        class="error"
+        *ngIf="
+        !studentForm.controls['username'].valid &&
+        studentForm.controls['username'].touched
+      "
+      >
+        Username is required
+      </span>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">First name</ion-label>
+      <ion-input type="text" formControlName="firstName" required></ion-input>
+      <span
+        class="error"
+        *ngIf="
+        !studentForm.controls['firstName'].valid &&
+        studentForm.controls['firstName'].touched
+      "
+      >
+        First Name is required
+      </span>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Last name</ion-label>
+      <ion-input type="text" formControlName="lastName" required></ion-input>
+      <span
+        class="error"
+        *ngIf="
+        !studentForm.controls['lastName'].valid &&
+        studentForm.controls['lastName'].touched
+      "
+      >
+        last Name is required
+      </span>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" formControlName="email" required></ion-input>
+      <span
+        class="error"
+        *ngIf="
+        !studentForm.controls['email'].valid &&
+        studentForm.controls['email'].touched
+      "
+      >
+        Email is required
+      </span>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Cin</ion-label>
+      <ion-input
+        type="number"
+        formControlName="cardNumber"
+        required
+      ></ion-input>
+      <span
+        class="error"
+        *ngIf="
+        !studentForm.controls['cardNumber'].valid &&
+        studentForm.controls['cardNumber'].touched
+      "
+      >
+        CIN is required
+      </span>
+    </ion-item>
+
+    <ion-item lines="full">
+      Picture
+      <input
+        type="file"
+        name="image"
+        ng2FileSelect
+        [uploader]="uploader"
+        (change)="pictureChangeEvent($event)"
+        accept="image/x-png,image/gif,image/jpeg"
+        placeholder="choose a file"
+      />
+    </ion-item>
+    <ion-item lines="full">
+      CV<input
+        type="file"
+        name="image"
+        ng2FileSelect
+        [uploader]="uploader"
+        (change)="cvChangeEvent($event)"
+        accept="image/x-png,image/gif,image/jpeg"
+        placeholder="choose a file"
+      />
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input
+        type="password"
+        formControlName="password"
+        required
+      ></ion-input>
+      <span
+        class="error"
+        *ngIf="
+        !studentForm.controls['password'].valid &&
+        studentForm.controls['password'].touched
+      "
+      >
+        password is required
+      </span>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button
+          type="submit"
+          class="btn postBtn"
+          id="signupbtn"
+          (click)="uploader.uploadAll()"
+          [disabled]="!studentForm.valid"
+          expand="block"
+          >Sign Up</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

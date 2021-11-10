@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mes Formations</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let trainingSession of trainingSessions">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="../../assets/img/formation.jpg" />
+      </ion-avatar>
+      <ion-label>
+        <h3>{{trainingSession.training.title}}</h3>
+        <p>date debut :{{trainingSession?.startDate}}</p>
+
+        <p>date fin :{{trainingSession?.endDate}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-card-header>
+      <ion-card-title class="download"
+        ><div class="title">le programme de la formation</div>
+        <ion-icon
+          class="icon"
+          (click)="download(trainingSession.training?.program)"
+          name="download-outline"
+        ></ion-icon>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

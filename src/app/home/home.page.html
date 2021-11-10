@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Accueil</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let training of trainingCourses">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="../../assets/img/formation.jpg" />
+      </ion-avatar>
+      <ion-label>
+        <h1>{{training.title}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-card-header>
+      <ion-card-title
+        ><a [routerLink]="['/menu/formation-details', training._id]"
+          >Details</a
+        ></ion-card-title
+      >
+    </ion-card-header>
+  </ion-card>
+</ion-content>
